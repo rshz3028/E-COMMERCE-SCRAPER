@@ -1,0 +1,6 @@
+pyenv/
+__pycache__/
+*.__pycache__*.pyo
+*.pyd
+scrapy.cfg
+.env
