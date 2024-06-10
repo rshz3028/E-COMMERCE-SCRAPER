@@ -6,7 +6,7 @@ import asyncpg
 async def insert_product_to_db(conn, product, table_name):
     async with conn.transaction():
         await conn.execute(
-            f"INSERT INTO {table_name} (title, price, link, rating, people_bought, image) VALUES ($1, $2, $3, $4, $5, $6);",
+            f"INSERT INTO {table_name} (title, price, link, rating, image) VALUES ($1, $2, $3, $4, $5);",
             *product
         )
 
@@ -35,35 +35,34 @@ async def scrape_flipkart(search_query, max_results=10, show_images=True):
 
         total_results = 0
         while total_results < max_results:
-            items = await page.query_selector_all('._1AtVbE')
+            items = await page.query_selector_all('.DOjaWF .cPHDOP')
             for item in items:
                 if total_results >= max_results:
                     break
-                title = await item.query_selector('._4rR01T')
+                title = await item.query_selector('.slAVV4 .wjcEIp')
                 title_text = await title.inner_text() if title else 'No Title'
 
-                price = await item.query_selector('._30jeq3._1_WHN1')
+                price = await item.query_selector('.hl05eU .Nx9bqj')
                 price_text = await price.inner_text() if price else 'No Price'
 
                 link = await title.get_attribute('href') if title else 'No Link'
 
-                rating = await item.query_selector('._1lRcqv ._3LWZlK')
+                rating = await item.query_selector('.Y1HWO0 .XQDdHH')
                 rating_text = await rating.inner_text() if rating else 'No Rating'
 
-                people_bought = 'Unknown'
-
                 if show_images:
-                    image_element = await item.query_selector('._396cs4')
+                    image_element = await item.query_selector('._4WELSP .DByuf4')
                     if image_element:
                         image_url = await image_element.get_attribute('src')
                         image_data = await download_image(image_url)
-                        product = (title_text, price_text, link, rating_text, people_bought, image_data)
+                        product = (title_text, price_text, link, rating_text, image_data)
                     else:
-                        product = (title_text, price_text, link, rating_text, people_bought, 'No Image')
+                        product = (title_text, price_text, link, rating_text, 'No Image')
                 else:
-                    product = (title_text, price_text, link, rating_text, people_bought, '')
+                    product = (title_text, price_text, link, rating_text, '')
 
                 # Insert the product into the database
+                if product[0] == "No Title": pass
                 await insert_product_to_db(conn, product, "flipkart_products")
 
                 total_results += 1
@@ -79,3 +78,8 @@ if __name__ == '__main__':
     search_query = input("Enter the item: ")
     asyncio.run(scrape_flipkart(search_query, max_results=10, show_images=True))
     print("Finished")
+
+
+
+
+    

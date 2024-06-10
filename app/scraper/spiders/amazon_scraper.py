@@ -6,7 +6,7 @@ import asyncpg
 async def insert_product_to_db(conn, product, table_name):
     async with conn.transaction():
         await conn.execute(
-            f"INSERT INTO {table_name} (title, price, link, rating, people_bought, image) VALUES ($1, $2, $3, $4, $5, $6);",
+            f"INSERT INTO {table_name} (title, price, link, image) VALUES ($1, $2, $3, $4, $5);",
             *product
         )
 
@@ -49,9 +49,6 @@ async def scrape_amazon(search_query, max_results=10, show_images=True):
 
                 rating = await item.query_selector('.a-icon-star-small .a-icon-alt')
                 rating_text = await rating.inner_text() if rating else 'No Rating'
-
-                people_bought = await item.query_selector('.a-size-small .a-color-secondary')
-                people_bought_text = await people_bought.inner_text() if people_bought else 'Unknown'
 
                 if show_images:
                     image_element = await item.query_selector('.s-image')

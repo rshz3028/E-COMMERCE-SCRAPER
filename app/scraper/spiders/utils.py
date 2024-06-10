@@ -36,41 +36,18 @@ def save_to_excel(search_query, products):
 def generate_table_script(table_name):
     if table_name == "amazon_products":
         return """
-            CREATE TABLE amazon_products (
+            CREATE TABLE IF NOT EXISTS amazon_products (
                 id SERIAL PRIMARY KEY,
                 title TEXT NOT NULL,
                 price TEXT,
                 link TEXT,
                 rating TEXT,
-                people_bought TEXT,
                 image TEXT
             );
         """
     elif table_name == "flipkart_products":
         return """
-            CREATE TABLE flipkart_products (
-                id SERIAL PRIMARY KEY,
-                title TEXT NOT NULL,
-                price TEXT,
-                link TEXT,
-                rating TEXT,
-                image TEXT
-            );
-        """
-    elif table_name == "ebay_products":
-        return """
-            CREATE TABLE ebay_products (
-                id SERIAL PRIMARY KEY,
-                title TEXT NOT NULL,
-                price TEXT,
-                link TEXT,
-                rating TEXT,
-                image TEXT
-            );
-        """
-    elif table_name == "etsy_products":
-        return """
-            CREATE TABLE etsy_products (
+            CREATE TABLE IF NOT EXISTS flipkart_products (
                 id SERIAL PRIMARY KEY,
                 title TEXT NOT NULL,
                 price TEXT,
