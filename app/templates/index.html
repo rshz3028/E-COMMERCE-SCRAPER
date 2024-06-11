@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Listing</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Product Listing</h1>
+    <div class="products">
+        {% for product in products %}
+            <div class="product">
+                <h2>{{ product[0] }}</h2>
+                <p>Price: {{ product[1] }}</p>
+                <p>Rating: {{ product[3] }}</p>
+                {% if product[5] %}
+                    <img src="data:image/jpeg;base64,{{ product[5] }}" alt="{{ product[0] }}">
+                {% else %}
+                    <p>No Image Available</p>
+                {% endif %}
+                <p><a href="{{ product[2] }}" target="_blank">View Product</a></p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

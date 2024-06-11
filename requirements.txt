@@ -1,9 +1,7 @@
 flask
-sqlalchemy
 psycopg2-binary 
 playwright
 pandas
-openpyxl
 pytest
 requests
 pillow
