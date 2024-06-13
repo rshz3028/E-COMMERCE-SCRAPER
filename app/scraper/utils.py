@@ -1,6 +1,7 @@
 import requests
 import base64
 import pandas as pd
+import psycopg2
 
 def download_image(url):
     try:

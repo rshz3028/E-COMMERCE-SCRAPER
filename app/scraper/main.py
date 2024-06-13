@@ -1,6 +1,6 @@
 # main.py
 import multiprocessing
-from spiders.amazon_scraper import scrape_amazon
+from app.amazon_scraper import scrape_amazon
 from spiders.flipkart_scraper import scrape_flipkart
 
 if __name__ == '__main__':

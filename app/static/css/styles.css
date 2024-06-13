@@ -1,36 +1,72 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
+    background-color: #e0a9a9;
+    margin: 0;
+    padding: 0;
 }
 
-h1, h5 {
-    color: #343a40;
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.navbar {
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: #333;
+    font-size: 36px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.search-section {
+    text-align: center;
+}
+
+.search-container {
+    background-color: #747070;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-container h2 {
+    color: #333;
+    font-size: 24px;
     margin-bottom: 20px;
 }
 
-.card {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.card-img-top {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+.search-form input[type="text"] {
+    padding: 10px;
+    border: 2px solid #007bff;
+    border-radius: 5px 0 0 5px;
+    width: 300px;
+    font-size: 16px;
+    outline: none;
 }
 
-.card-body {
-    padding: 15px;
+.search-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    outline: none;
 }
 
-.card-title a {
-    text-decoration: none;
-    color: #007bff;
-}
-
-.card-title a:hover {
-    color: #0056b3;
+.search-form button:hover {
+    background-color: #0056b3;
 }

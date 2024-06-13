@@ -2,12 +2,15 @@ import sys
 import time
 import psycopg2
 from playwright.sync_api import sync_playwright
-from utils import download_image, generate_table_script, drop_table, create_table, establish_connection, delete_null
+from .utils import download_image, generate_table_script, insert_product_to_db, drop_table, create_table, establish_connection, delete_null
 
 def scrape_amazon(search_query, max_results=11, show_images=True):
     conn = None
     try:
         conn = establish_connection()
+        if conn is None:
+            raise Exception("Failed to connect to the database")
+
         drop_table(conn, "amazon_products")
         create_table(conn, generate_table_script("amazon_products"))
 
@@ -58,8 +61,8 @@ def scrape_amazon(search_query, max_results=11, show_images=True):
     except Exception as e:
         print(f"An error occurred: {e}")
     finally:
-        delete_null(conn, "amazon_products")
         if conn:
+            delete_null(conn, "amazon_products")
             conn.close()
 
 if __name__ == '__main__':

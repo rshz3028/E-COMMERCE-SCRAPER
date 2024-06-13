@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Scraper Results</title>
+    <title>Product Listing</title>
     <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <h1>Product Listing</h1>
-    <div class="products">
-        {% for product in products %}
-            <div class="product">
-                <h2>{{ product[0] }}</h2>
-                <p>Price: {{ product[1] }}</p>
-                <p>Rating: {{ product[3] }}</p>
-                {% if product[5] %}
-                    <img src="data:image/jpeg;base64,{{ product[5] }}" alt="{{ product[0] }}">
-                {% else %}
-                    <p>No Image Available</p>
-                {% endif %}
-                <p><a href="{{ product[2] }}" target="_blank">View Product</a></p>
-            </div>
-        {% endfor %}
+    <div class="container">
+        <h1>Product Listing</h1>
+        <div class="products">
+            {% for product in products %}
+                <div class="product">
+                    <img src="data:image/jpeg;base64,{{ product[4] }}" alt="{{ product[0] }}">
+                    <div class="product-details">
+                        <h2>{{ product[0] }}</h2>
+                        <p class="price">Price: ${{ product[1] }}</p>
+                        <p class="rating">Rating: {{ product[3] }}</p>
+                        <p class="link"><a href="{{ product[2] }}" target="_blank">View Product</a></p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </body>
 </html>

@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import psycopg2
-import subprocess
-import time
+from scraper.amazon_scraper import scrape_amazon  # Import the scraper function directly
 
 app = Flask(__name__)
 
@@ -36,11 +35,8 @@ def homepage():
 def scrape():
     product_name = request.form['product_name']
     
-    # Trigger scrapers (update these lines to match your actual scraper commands)
-    subprocess.Popen(["python", "spiders/amazon_scraper.py", product_name])
-    
-    # Give some time for scrapers to fetch data (adjust as needed)
-    time.sleep(50)
+    # Call the scraper function directly
+    scrape_amazon(product_name)
     
     return redirect(url_for('index'))
 
