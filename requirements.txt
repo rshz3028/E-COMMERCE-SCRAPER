@@ -4,6 +4,6 @@ playwright
 pandas
 pytest
 requests
-pillow
-aiohttp
-asyncpg
+sys
+base64
+time
